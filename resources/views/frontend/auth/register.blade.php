@@ -86,6 +86,8 @@
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="/login">Already have an account? Login!</a>
+                                        <br>
+                                        <a class="small" href="/">Back To Home</a>
                                     </div>
                                 </div>
                             </div>

@@ -10,4 +10,8 @@ class HouseBlock extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function booking(){
+        return $this->hasOne(Booking::class, 'house_block_id');
+    }
 }

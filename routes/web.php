@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PemesananController;
 use App\Http\Controllers\Backend\PerumahanController;
@@ -18,16 +19,13 @@ use App\Http\Controllers\Backend\UserManagementController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'getLogin'])->name('getLogin');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'getRegister'])->name('getRegister');
 
 
+// route cms
 Route::prefix('admin')->middleware('auth.custom')->name('admin.')->group(function () {
      // Routes that require custom authentication middleware
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -62,8 +60,21 @@ Route::prefix('admin')->middleware('auth.custom')->name('admin.')->group(functio
 
     // usermanagement
     Route::get('/user-management', [UserManagementController::class, 'index'])->name('user.management');
+    Route::prefix('user-management')->name('usermanagement.')->group( function(){
+        // CRUD USER MANAGEMENT
+        Route::post('/create', [UserManagementController::class, 'store'])->name('store');
+        Route::get('/detailJson', [UserManagementController::class, 'detailJson'])->name('detail.json');
+        Route::post('/update', [UserManagementController::class, 'update'])->name('update');
+    });
 
 
     // logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::prefix('perumahan')->name('perumahan.')->group( function(){
+    // CRUD PERUMAHAN
+    Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 });

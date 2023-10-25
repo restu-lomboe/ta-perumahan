@@ -84,6 +84,8 @@
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="/register">Create an Account!</a>
+                                        <br>
+                                        <a class="small" href="/">Back To Home</a>
                                     </div>
                                 </div>
                             </div>

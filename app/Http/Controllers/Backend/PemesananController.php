@@ -95,7 +95,7 @@ class PemesananController extends Controller
         $booking->update([
             'house_id' => $request->perumahan_id,
             'house_block_id' => $request->blok_id,
-            'status' => $request->status,
+            'status' => $request->status ? $request->status : $booking->status ,
             'payment' => $request->pembayaran ? $image : $booking->payment
         ]);
 

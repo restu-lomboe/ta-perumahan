@@ -183,16 +183,19 @@
                                 <input type="file" class="form-control" name="pembayaran" id="pembayaran">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="blok" class="col-sm-4 col-form-label">Status</label>
-                            <div class="col-sm-8">
-                                <select name="status" class="custom-select custom-select-sm" id="status" required>
-                                    <option selected disabled>-- Pilih --</option>
-                                    <option value="0">menunggu</option>
-                                    <option value="1">berhasil</option>
-                                </select>
+                        @if (auth()->user()->role_id != 3)
+                            <div class="form-group row">
+                                <label for="blok" class="col-sm-4 col-form-label">Status</label>
+                                <div class="col-sm-8">
+                                    <select name="status" class="custom-select custom-select-sm" id="status"
+                                        required>
+                                        <option selected disabled>-- Pilih --</option>
+                                        <option value="0">menunggu</option>
+                                        <option value="1">berhasil</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

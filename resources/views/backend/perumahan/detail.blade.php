@@ -80,13 +80,16 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->no }}</td>
                                     <td class="text-center">
-                                        @if ($item->status == 'ready')
-                                            <span class="badge badge-success">Ready</span>
-                                        @elseif ($item->status == 'booking')
-                                            <span class="badge badge-warning">Booking</span>
+                                        @if ($status = checkHouseStatus($perumahan->id, $item->id))
+                                            @if ($status->status == 0)
+                                                <span class="badge badge-warning">Booking</span>
+                                            @else
+                                                <span class="badge badge-primary">Deal</span>
+                                            @endif
                                         @else
-                                            <span class="badge badge-primary">Deal</span>
+                                            <span class="badge badge-success">Ready</span>
                                         @endif
+
                                     </td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                                     <td class="text-center">
