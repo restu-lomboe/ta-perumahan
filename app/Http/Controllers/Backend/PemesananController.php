@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\User;
 use App\Models\House;
 use App\Models\Booking;
 use Illuminate\Http\Request;
@@ -15,9 +16,13 @@ class PemesananController extends Controller
         $perumahan = House::orderBy('created_at', 'desc')
                             ->get();
 
+        $users = User::where('role_id', 3)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
         $bookings = Booking::orderBy('created_at', 'desc')->get();
 
-        return view('backend.pemesanan.index', compact('perumahan', 'bookings'));
+        return view('backend.pemesanan.index', compact('perumahan', 'bookings', 'users'));
     }
 
     public function store(Request $request){
@@ -25,7 +30,8 @@ class PemesananController extends Controller
         $request->validate([
             'perumahan_id' => 'required|integer',
             'blok_id' => 'required|integer',
-            'pembayaran' => 'required|image|mimes:png,jpeg,jpg|max:2048'
+            'pembayaran' => 'required|image|mimes:png,jpeg,jpg|max:2048',
+            'sales' =>  $request->sales ? 'required|integer' : '',
         ]);
 
         $bookings = Booking::where('user_id', auth()->user()->id)
@@ -46,7 +52,7 @@ class PemesananController extends Controller
             $image->move(public_path('uploads'), $imageName);
 
             $booking = new Booking;
-            $booking->user_id = auth()->user()->id;
+            $booking->user_id = auth()->user()->role_id != 3 ? $request->sales : auth()->user()->id ;
             $booking->house_id = $request->perumahan_id;
             $booking->house_block_id = $request->blok_id;
             $booking->payment = $imageName;
@@ -72,7 +78,8 @@ class PemesananController extends Controller
         $request->validate([
             'perumahan_id' => 'required|integer',
             'blok_id' => 'required|integer',
-            'pembayaran' => 'image|mimes:png,jpeg,jpg|max:2048'
+            'pembayaran' => 'image|mimes:png,jpeg,jpg|max:2048',
+            'sales' =>  $request->sales ? 'required|integer' : '',
         ]);
 
         $booking = Booking::where('id', $request->get('id'))->first();
@@ -94,6 +101,7 @@ class PemesananController extends Controller
 
         $booking->update([
             'house_id' => $request->perumahan_id,
+            'user_id' => auth()->user()->role_id != 3 ? $request->sales : auth()->user()->id,
             'house_block_id' => $request->blok_id,
             'status' => $request->status ? $request->status : $booking->status ,
             'payment' => $request->pembayaran ? $image : $booking->payment

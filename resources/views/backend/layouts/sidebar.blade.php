@@ -34,27 +34,26 @@
         </li>
     @else
         @if (auth()->user()->role_id == 2)
-            <li class="nav-item @if (\Route::current()->getName() == 'admin.perumahan') active @endif">
-                <a class="nav-link" href="{{ route('admin.perumahan') }}">
-                    <i class="fas fa-home"></i>
-                    <span>Perumahan</span></a>
-            </li>
-
             <li class="nav-item @if (\Route::current()->getName() == 'admin.pemesanan') active @endif">
                 <a class="nav-link" href="{{ route('admin.pemesanan') }}">
                     <i class="far fa-calendar-check"></i>
                     <span>Pemesanan</span></a>
+            </li>
+            <li class="nav-item @if (\Route::current()->getName() == 'admin.perumahan') active @endif">
+                <a class="nav-link" href="{{ route('admin.perumahan') }}">
+                    <i class="fas fa-home"></i>
+                    <span>Perumahan</span></a>
             </li>
         @else
-            <li class="nav-item @if (\Route::current()->getName() == 'admin.perumahan') active @endif">
-                <a class="nav-link" href="{{ route('admin.perumahan') }}">
-                    <i class="fas fa-home"></i>
-                    <span>Perumahan</span></a>
-            </li>
             <li class="nav-item @if (\Route::current()->getName() == 'admin.pemesanan') active @endif">
                 <a class="nav-link" href="{{ route('admin.pemesanan') }}">
                     <i class="far fa-calendar-check"></i>
                     <span>Pemesanan</span></a>
+            </li>
+            <li class="nav-item @if (\Route::current()->getName() == 'admin.perumahan') active @endif">
+                <a class="nav-link" href="{{ route('admin.perumahan') }}">
+                    <i class="fas fa-home"></i>
+                    <span>Perumahan</span></a>
             </li>
             <li class="nav-item @if (\Route::current()->getName() == 'admin.user.management') active @endif">
                 <a class="nav-link" href="{{ route('admin.user.management') }}">

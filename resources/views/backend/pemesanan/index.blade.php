@@ -105,6 +105,19 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        @if (auth()->user()->role_id != 3)
+                            <div class="form-group row">
+                                <label for="sales" class="col-sm-4 col-form-label">Sales</label>
+                                <div class="col-sm-8">
+                                    <select name="sales" class="custom-select custom-select-sm" id="sales" required>
+                                        <option selected disabled>-- Pilih --</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group row">
                             <label for="noRumah" class="col-sm-4 col-form-label">Perumahan</label>
                             <div class="col-sm-8">
@@ -156,6 +169,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        @if (auth()->user()->role_id != 3)
+                            <div class="form-group row">
+                                <label for="salesUpdate" class="col-sm-4 col-form-label">Sales</label>
+                                <div class="col-sm-8">
+                                    <select name="sales" class="custom-select custom-select-sm" id="salesUpdate"
+                                        required>
+                                        <option selected disabled>-- Pilih --</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group row">
                             <label for="perumahanUpdate" class="col-sm-4 col-form-label">Perumahan</label>
                             <div class="col-sm-8">
@@ -246,6 +273,7 @@
                         '</option>')
 
                     $('#status').val(response.status);
+                    $('#salesUpdate').val(response.user_id);
 
                     $('#formUpdate').attr('action',
                         "{{ route('admin.pemesanan.update') }}?id=" + idValue)

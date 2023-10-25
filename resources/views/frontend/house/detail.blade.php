@@ -9,15 +9,15 @@
         }
 
         .block-card {
-            width: fit-content;
+            /* width: fit-content; */
         }
 
         .block-card .block {
-            width: 70px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            /* width: 200px; */
+            /* height: 80px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center; */
         }
 
         .divider-vertical {
@@ -84,7 +84,7 @@
 
 
     <!-- Marketing messaging and featurettes
-                                                                                                                                                                                        ================================================== -->
+                                                                                                                                                                                                                ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
@@ -106,16 +106,16 @@
                     </div>
                 @endfor --}}
                 @foreach ($house->blocks as $item)
-                    <div class="col-md-1 mb-3 @if ($loop->iteration % 2 == 0) pl-0 @else pr-0 @endif">
+                    <div class="col-md-2 mb-3 @if ($loop->iteration % 2 == 0) pl-0 @else pr-0 @endif">
                         <div class="block-card text-center">
                             <div
                                 class="block border p-2 {{ checkHouseStatus($house->id, $item->id) ? (checkHouseStatus($house->id, $item->id)->status == 0 ? 'bg-warning' : 'bg-success') : 'bg-secondary' }}">
-                                <h1 class="mb-0 text-white">{{ $item->name }}</h1>
+                                <h1 class="mb-0 text-white">{{ $item->name }}-{{ $item->no }}</h1>
                             </div>
-                            <div
+                            {{-- <div
                                 class="block border p-2 {{ checkHouseStatus($house->id, $item->id) ? (checkHouseStatus($house->id, $item->id)->status == 0 ? 'bg-warning' : 'bg-success') : 'bg-secondary' }}">
                                 <h1 class="mb-0 text-white">{{ $item->no }}</h1>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 @endforeach
