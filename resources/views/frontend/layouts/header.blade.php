@@ -5,7 +5,11 @@
 </style>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand font-weight-bold" href="/">DEVELOPER AWAM</a>
+        <a class="navbar-brand font-weight-bold" href="/">
+            <img src="{{ asset('assets/img/logo-rumah.png') }}" alt="" width="50" height="50"
+                style="object-fit: contain;">
+            PT PRIMA INTI NUSA
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
