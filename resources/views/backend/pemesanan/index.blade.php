@@ -69,7 +69,10 @@
                                 <th>Pemesanan Pada</th>
                                 <th>Status</th>
                                 <th>Note</th>
-                                <th>Aksi</th>
+                                @if (auth()->user()->role_id == 1)
+                                    <th>Aksi</th>
+                                @endif
+
                             </tr>
                         </thead>
                         <tbody>
@@ -165,10 +168,13 @@
                                             @default
                                         @endswitch
                                     </td>
-                                    <td class="text-center">
-                                        <a href="javascript:" class="btn btn-warning btn-sm update"
-                                            data-id="{{ $item->id }}" title="update"><i class="fas fa-edit"></i></a>
-                                    </td>
+                                    @if (auth()->user()->role_id == 1)
+                                        <td class="text-center">
+                                            <a href="javascript:" class="btn btn-warning btn-sm update"
+                                                data-id="{{ $item->id }}" title="update"><i
+                                                    class="fas fa-edit"></i></a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

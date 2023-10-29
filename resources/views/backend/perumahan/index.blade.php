@@ -14,11 +14,13 @@
                 <div class="">
                     <h1 class="h3 text-gray-800">Daftar Perumahan</h1>
                 </div>
-                <div class="">
-                    <a href="{{ route('admin.perumahan.form', 'create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus-circle"></i> Tambah Perumahan
-                    </a>
-                </div>
+                @if (auth()->user()->role_id == 1)
+                    <div class="">
+                        <a href="{{ route('admin.perumahan.form', 'create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i> Tambah Perumahan
+                        </a>
+                    </div>
+                @endif
             </div>
             @if (session('success'))
                 <div class="alert alert-success mt-3">
@@ -52,8 +54,11 @@
                                     <td class="text-center">
                                         <a href="{{ route('admin.perumahan.detail', ['id' => $item->id]) }}"
                                             class="btn btn-primary btn-sm" title="detail"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('admin.perumahan.form', ['update', 'id' => $item->id]) }}"
-                                            class="btn btn-warning btn-sm" title="update"><i class="fas fa-edit"></i></a>
+                                        @if (auth()->user()->role_id == 1)
+                                            <a href="{{ route('admin.perumahan.form', ['update', 'id' => $item->id]) }}"
+                                                class="btn btn-warning btn-sm" title="update"><i
+                                                    class="fas fa-edit"></i></a>
+                                        @endif
                                         {{-- <a href="{{ route('admin.perumahan.delete', ['id' => $item->id]) }}"
                                             class="btn btn-danger btn-sm" title="delete"><i
                                                 class="fas fa-trash-alt"></i></a> --}}
