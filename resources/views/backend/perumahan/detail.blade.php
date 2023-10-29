@@ -53,11 +53,13 @@
                 <div class="d-flex justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary d-flex" style="align-items: center;">Daftar Blok Perumahan
                     </h6>
-                    <div class="">
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#TambahBlokModal">
-                            <i class="fas fa-plus-circle"></i> Tambah Blok Perumahan
-                        </a>
-                    </div>
+                    @if (auth()->user()->role_id == 1)
+                        <div class="">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#TambahBlokModal">
+                                <i class="fas fa-plus-circle"></i> Tambah Blok Perumahan
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -73,7 +75,9 @@
                                 <th>No ID PDAM</th>
                                 <th style="width: 100px;">Status</th>
                                 <th style="width: 200px;">Ditambahkan Pada</th>
-                                <th style="width: 100px;">Aksi</th>
+                                @if (auth()->user()->role_id == 1)
+                                    <th style="width: 100px;">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -98,10 +102,12 @@
 
                                     </td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
-                                    <td class="text-center">
-                                        <button type="button" data-id="{{ $item->id }}"
-                                            class="btn btn-warning btn-sm update"><i class="fas fa-edit"></i></button>
-                                    </td>
+                                    @if (auth()->user()->role_id == 1)
+                                        <td class="text-center">
+                                            <button type="button" data-id="{{ $item->id }}"
+                                                class="btn btn-warning btn-sm update"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
