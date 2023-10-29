@@ -118,6 +118,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="phone" class="col-sm-4 col-form-label">Phone Number</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="phone" id="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="password" class="col-sm-4 col-form-label">Password</label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" name="password" id="password" required>
@@ -179,6 +185,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="phoneUpdate" class="col-sm-4 col-form-label">Phone Number</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" name="phone" id="phoneUpdate" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="passwordUpdate" class="col-sm-4 col-form-label">Password</label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" name="password" id="passwordUpdate">
@@ -228,6 +240,7 @@
                     // Handle the successful response from the server.
                     $('#nameUpdate').val(response.name);
                     $('#emailUpdate').val(response.email);
+                    $('#phoneUpdate').val(response.phone);
                     $('#roleUpdate').val(response.role_id);
 
                     $('#formUpdate').attr('action',

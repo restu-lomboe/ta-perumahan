@@ -13,11 +13,22 @@
                 <div class="d-flex" style="align-item: center;">
                     <h1 class="h3 text-gray-800 mb-0">Daftar Pemesanan</h1>
                 </div>
-                <div class="">
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#TambahPemesananModal">
-                        <i class="fas fa-plus-circle"></i> Tambah Pemesanan
-                    </a>
-                </div>
+                @if (auth()->user()->role_id == 3)
+                    @if ($bookings->isEmpty())
+                        <div class="">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#TambahPemesananModal">
+                                <i class="fas fa-plus-circle"></i> Tambah Pemesanan
+                            </a>
+                        </div>
+                    @endif
+                @else
+                    <div class="">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#TambahPemesananModal">
+                            <i class="fas fa-plus-circle"></i> Tambah Pemesanan
+                        </a>
+                    </div>
+                @endif
+
             </div>
             @if (session('success'))
                 <div class="alert alert-success mt-3">
@@ -57,6 +68,7 @@
                                 <th>Pembayaran</th>
                                 <th>Pemesanan Pada</th>
                                 <th>Status</th>
+                                <th>Note</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -72,11 +84,86 @@
                                     </td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                                     <td>
-                                        @if ($item->status == 0)
-                                            <span class="badge badge-warning">menunggu</span>
-                                        @else
-                                            <span class="badge badge-success">berhasil</span>
-                                        @endif
+                                        @switch($item->status)
+                                            @case(0)
+                                                <span class="badge badge-warning">Booking</span>
+                                            @break
+
+                                            @case(1)
+                                                <span class="badge badge-warning">Masuk Berkas</span>
+                                            @break
+
+                                            @case(2)
+                                                <span class="badge badge-warning">Wawancara</span>
+                                            @break
+
+                                            @case(3)
+                                                <span class="badge badge-warning">Survey</span>
+                                            @break
+
+                                            @case(4)
+                                                <span class="badge badge-warning">SP3K</span>
+                                            @break
+
+                                            @case(5)
+                                                <span class="badge badge-warning">BTN + Notaris</span>
+                                            @break
+
+                                            @case(6)
+                                                <span class="badge badge-success">Akad</span>
+                                            @break
+
+                                            @case(7)
+                                                <span class="badge badge-danger">Gagal</span>
+                                            @break
+
+                                            <span class="badge badge-warning">Booking</span>
+
+                                            @default
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                        @switch($item->status)
+                                            @case(0)
+                                                <span class="text-danger">silahkan tunggu 1x24 jam untuk proses
+                                                    selanjutnya</span>
+                                            @break
+
+                                            @case(1)
+                                                <span class="text-danger">silahkan antar berkas berikut ke kantor Prima Inti
+                                                    nusa di Jl. Flamboyan I Komplek Taman Asoka Asri Blok
+                                                    B-3B Medan 20134</span>
+                                            @break
+
+                                            @case(2)
+                                                <span class="text-danger">Silahkan Datang Ke Kantor untuk proses wawancara</span>
+                                            @break
+
+                                            @case(3)
+                                                <span class="text-danger">-</span>
+                                            @break
+
+                                            @case(4)
+                                                <span class="text-danger">Silahkan Datang Ke Kantor untuk proses SP3K</span>
+                                            @break
+
+                                            @case(5)
+                                                <span class="text-danger">Silahkan Datang Ke Kantor untuk proses BTN +
+                                                    Notaris</span>
+                                            @break
+
+                                            @case(6)
+                                                <span class="text-success">Silahkan Datang Ke Kantor untuk mengambil kunci</span>
+                                            @break
+
+                                            @case(7)
+                                                <span class="text-danger">Pemesanan Gagal</span>
+                                            @break
+
+                                            <span class="text-danger"></span>
+
+                                            @default
+                                        @endswitch
                                     </td>
                                     <td class="text-center">
                                         <a href="javascript:" class="btn btn-warning btn-sm update"
@@ -143,6 +230,9 @@
                             <label for="pembayaran" class="col-sm-4 col-form-label">Bukti Pembayaran Booking Fee</label>
                             <div class="col-sm-8">
                                 <input type="file" class="form-control" name="pembayaran" id="pembayaran" required>
+                                <small>Note: Silahkan lakukan pembayaran ke no rekening berikut 0122224455</small>
+                                <br>
+                                <small>Minimal Pembayaran Booking Fee Rp 2.000.000</small>
                             </div>
                         </div>
                     </div>
@@ -208,6 +298,9 @@
                             <label for="pembayaran" class="col-sm-4 col-form-label">Bukti Pembayaran Booking Fee</label>
                             <div class="col-sm-8">
                                 <input type="file" class="form-control" name="pembayaran" id="pembayaran">
+                                <small>Note: Silahkan lakukan pembayaran ke no rekening berikut 0122224455</small>
+                                <br>
+                                <small>Minimal Pembayaran Booking Fee Rp 2.000.000</small>
                             </div>
                         </div>
                         @if (auth()->user()->role_id != 3)
@@ -217,8 +310,14 @@
                                     <select name="status" class="custom-select custom-select-sm" id="status"
                                         required>
                                         <option selected disabled>-- Pilih --</option>
-                                        <option value="0">menunggu</option>
-                                        <option value="1">berhasil</option>
+                                        <option value="0">Booking</option>
+                                        <option value="1">Masuk Berkas</option>
+                                        <option value="2">Wawancara</option>
+                                        <option value="3">Survey</option>
+                                        <option value="4">SP3K</option>
+                                        <option value="5">BTN + Notaris</option>
+                                        <option value="6">Akad</option>
+                                        <option value="7">Gagal</option>
                                     </select>
                                 </div>
                             </div>

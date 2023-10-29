@@ -21,6 +21,7 @@ class UserManagementController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'email' => 'required|email',
+            'phone' => 'required',
             'password' => 'required|min:8|confirmed',
             'role' => 'required',
         ]);
@@ -31,6 +32,7 @@ class UserManagementController extends Controller
             $user->role_id = $request->role;
             $user->name = $request->nama;
             $user->email = $request->email;
+            $user->phone = $request->phone;
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -54,6 +56,7 @@ class UserManagementController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'email' => 'required|email',
+            'phone' => 'required',
             'role' => 'required',
             'password' => $request->password ? 'required|min:8|confirmed' : ''
         ]);
@@ -64,6 +67,7 @@ class UserManagementController extends Controller
             'role_id' => $request->role,
             'name' => $request->nama,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => $request->password ? Hash::make($request->password) : $user->password
         ]);
 

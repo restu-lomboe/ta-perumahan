@@ -68,6 +68,9 @@
                                 <th style="width: 70px;">No</th>
                                 <th>Blok</th>
                                 <th>No Rumah</th>
+                                <th>No Token Listrik</th>
+                                <th>No IMB</th>
+                                <th>No ID PDAM</th>
                                 <th style="width: 100px;">Status</th>
                                 <th style="width: 200px;">Ditambahkan Pada</th>
                                 <th style="width: 100px;">Aksi</th>
@@ -79,6 +82,9 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->no }}</td>
+                                    <td>{{ $item->no_token_listrik }}</td>
+                                    <td>{{ $item->no_imb }}</td>
+                                    <td>{{ $item->no_id_pdam }}</td>
                                     <td class="text-center">
                                         @if ($status = checkHouseStatus($perumahan->id, $item->id))
                                             @if ($status->status == 0)
@@ -122,28 +128,46 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="blok" class="col-sm-3 col-form-label">Blok</label>
-                            <div class="col-sm-9">
+                            <label for="blok" class="col-sm-4 col-form-label">Blok</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="blok" value="{{ old('blok') }}"
                                     placeholder="Blok Perumahan" id="blok" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="noRumah" class="col-sm-3 col-form-label">No Rumah</label>
-                            <div class="col-sm-9">
+                            <label for="noRumah" class="col-sm-4 col-form-label">No Rumah</label>
+                            <div class="col-sm-8">
                                 <input type="number" min="1" class="form-control" name="no_rumah"
                                     value="{{ old('no_rumah') }}" placeholder="No Perumahan" id="noRumah" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="blok" class="col-sm-3 col-form-label">Status</label>
-                            <div class="col-sm-9">
+                            <label for="blok" class="col-sm-4 col-form-label">Status</label>
+                            <div class="col-sm-8">
                                 <select name="status" class="custom-select custom-select-sm" required>
                                     <option selected>-- Pilih --</option>
                                     <option value="1">Ready</option>
                                     <option value="2">Booking</option>
                                     <option value="3">Deal</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="noTokenListrik" class="col-sm-4 col-form-label">No Token Listrik</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="no_token_listrik" id="noTokenListrik">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="noImb" class="col-sm-4 col-form-label">No IMB</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="no_imb" id="noImb">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="noIdPdam" class="col-sm-4 col-form-label">No ID PDAM</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="no_id_pdam" id="noIdPdam">
                             </div>
                         </div>
                     </div>
@@ -156,7 +180,7 @@
         </div>
     </div>
 
-    <!-- Create Modal-->
+    <!-- Update Modal-->
     <div class="modal fade" id="UpdateBlokModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -164,35 +188,54 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="exampleModalLabel">Formulir Tambah Blok Perumahan</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Formulir Update Blok Perumahan</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="blok" class="col-sm-3 col-form-label">Blok</label>
-                            <div class="col-sm-9">
+                            <label for="blok" class="col-sm-4 col-form-label">Blok</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="blok" placeholder="Blok Perumahan"
                                     id="blokUpdate" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="noRumah" class="col-sm-3 col-form-label">No Rumah</label>
-                            <div class="col-sm-9">
+                            <label for="noRumah" class="col-sm-4 col-form-label">No Rumah</label>
+                            <div class="col-sm-8">
                                 <input type="number" min="1" class="form-control" name="no_rumah"
                                     placeholder="No Perumahan" id="noRumahUpdate" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="blok" class="col-sm-3 col-form-label">Status</label>
-                            <div class="col-sm-9">
+                            <label for="blok" class="col-sm-4 col-form-label">Status</label>
+                            <div class="col-sm-8">
                                 <select name="status" class="custom-select custom-select-sm" id="status" required>
                                     <option selected>-- Pilih --</option>
                                     <option value="1">Ready</option>
                                     <option value="2">Booking</option>
                                     <option value="3">Deal</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="noTokenListrikUpdate" class="col-sm-4 col-form-label">No Token Listrik</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="no_token_listrik"
+                                    id="noTokenListrikUpdate">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="noImbUpdate" class="col-sm-4 col-form-label">No IMB</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="no_imb" id="noImbUpdate">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="noIdPdamUpdate" class="col-sm-4 col-form-label">No ID PDAM</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="no_id_pdam" id="noIdPdamUpdate">
                             </div>
                         </div>
                     </div>
@@ -220,6 +263,9 @@
                     $('#UpdateBlokModal').modal('show')
                     $('#blokUpdate').val(response.name)
                     $('#noRumahUpdate').val(response.no)
+                    $('#noTokenListrikUpdate').val(response.no_token_listrik)
+                    $('#noImbUpdate').val(response.no_imb)
+                    $('#noIdPdamUpdate').val(response.no_id_pdam)
                     $('#status').val(response.status == 'ready' ? 1 : (response.status == 'booking' ?
                         2 : 3))
 

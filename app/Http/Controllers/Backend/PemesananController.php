@@ -20,7 +20,11 @@ class PemesananController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->get();
 
-        $bookings = Booking::orderBy('created_at', 'desc')->get();
+        if (auth()->user()->role_id != 3) {
+            $bookings = Booking::orderBy('created_at', 'desc')->get();
+        } else {
+            $bookings = Booking::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        }
 
         return view('backend.pemesanan.index', compact('perumahan', 'bookings', 'users'));
     }
@@ -34,7 +38,7 @@ class PemesananController extends Controller
             'sales' =>  $request->sales ? 'required|integer' : '',
         ]);
 
-        $bookings = Booking::where('user_id', auth()->user()->id)
+        $bookings = Booking::where('user_id', auth()->user()->role_id != 3 ? $request->sales : auth()->user()->id)
                                 ->where('house_id', $request->perumahan_id)
                                 ->where('house_block_id', $request->blok_id)
                                 ->first();
@@ -103,7 +107,8 @@ class PemesananController extends Controller
             'house_id' => $request->perumahan_id,
             'user_id' => auth()->user()->role_id != 3 ? $request->sales : auth()->user()->id,
             'house_block_id' => $request->blok_id,
-            'status' => $request->status ? $request->status : $booking->status ,
+            'status' => $request->status,
+            'akad_at' => $request->status == 6 ? date('Y-m-d H:i:s') : null,
             'payment' => $request->pembayaran ? $image : $booking->payment
         ]);
 

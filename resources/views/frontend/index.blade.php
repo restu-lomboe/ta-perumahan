@@ -10,7 +10,7 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://img.freepik.com/free-photo/luxury-pool-villa-spectacular-contemporary-design-digital-art-real-estate-home-house-property-ge_1258-150749.jpg?w=1060&t=st=1698236909~exp=1698237509~hmac=31911ef40eba454050c61429b05fb5cf25fd167ee50ed6c210f32dbcd7baafe7"
+                <img src="{{ asset('assets/img/bg-rumah.jpg') }}"
                     alt="">
 
                 <div class="container">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://img.freepik.com/free-photo/luxury-pool-villa-spectacular-contemporary-design-digital-art-real-estate-home-house-property-ge_1258-150749.jpg?w=1060&t=st=1698236909~exp=1698237509~hmac=31911ef40eba454050c61429b05fb5cf25fd167ee50ed6c210f32dbcd7baafe7"
+                <img src="{{ asset('assets/img/bg-rumah.jpg') }}"
                     alt="">
 
                 <div class="container">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://img.freepik.com/free-photo/luxury-pool-villa-spectacular-contemporary-design-digital-art-real-estate-home-house-property-ge_1258-150749.jpg?w=1060&t=st=1698236909~exp=1698237509~hmac=31911ef40eba454050c61429b05fb5cf25fd167ee50ed6c210f32dbcd7baafe7"
+                <img src="{{ asset('assets/img/bg-rumah.jpg') }}"
                     alt="">
 
                 <div class="container">
@@ -68,8 +68,8 @@
             @foreach ($houses as $house)
                 <div class="card border-0 text-center" style="width: 300px">
                     <div class="d-flex justify-content-center">
-                        <img src="https://img.freepik.com/free-vector/beautiful-home_24877-50819.jpg?w=826&t=st=1698203259~exp=1698203859~hmac=8749335683a48cb9b0a1660ca326a4186fc6c984ad5961de0828eebd53cbbc62"
-                            width="200px" height="200px" class="rounded-circle border" alt="{{ $house->name }}">
+                        <img src="{{ asset('assets/img/rumah.jpg') }}"
+                            width="200px" height="200px" class="rounded-circle border" alt="{{ $house->name }}" style="object-fit: cover;">
                     </div>
 
                     <h4>{{ $house->name }}</h4>

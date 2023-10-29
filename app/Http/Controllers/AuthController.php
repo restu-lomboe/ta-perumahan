@@ -39,6 +39,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required|min:8|confirmed',
         ]);
 
@@ -46,6 +47,7 @@ class AuthController extends Controller
         $user->role_id = 2; //role user
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
         $user->save();
 

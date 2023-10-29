@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PemesananController;
 use App\Http\Controllers\Backend\PerumahanController;
@@ -55,6 +56,13 @@ Route::prefix('admin')->middleware('auth.custom')->name('admin.')->group(functio
         Route::post('/create', [PemesananController::class, 'store'])->name('store');
         Route::get('/detailJson', [PemesananController::class, 'detailJson'])->name('detail.json');
         Route::post('/update', [PemesananController::class, 'update'])->name('update');
+    });
+
+    // report
+    Route::get('/report', [ReportController::class, 'index'])->name('report');
+    Route::prefix('report')->name('report.')->group( function(){
+        //
+        Route::post('/download-pdf', [ReportController::class, 'download'])->name('download');
     });
 
 
