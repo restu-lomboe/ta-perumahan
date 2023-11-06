@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\User;
 use App\Models\House;
 use App\Models\Booking;
+use App\Models\HouseBlock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -62,6 +63,10 @@ class PemesananController extends Controller
             $booking->payment = $imageName;
             $booking->save();
 
+            HouseBlock::find($request->blok_id)->update([
+                'status' => 'booking'
+            ]);
+
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -110,6 +115,10 @@ class PemesananController extends Controller
             'status' => $request->status,
             'akad_at' => $request->status == 6 ? date('Y-m-d H:i:s') : null,
             'payment' => $request->pembayaran ? $image : $booking->payment
+        ]);
+
+        HouseBlock::find($request->blok_id)->update([
+            'status' => $request->status == 6 ? 'deal' : ($request->status == 7 ? 'ready' : 'booking')
         ]);
 
         return redirect()->back()->with('success', 'pemesanan berhasil diubah');

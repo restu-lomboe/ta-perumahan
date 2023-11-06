@@ -152,10 +152,16 @@ class PerumahanController extends Controller
 
         $perumahan = House::find($request->get('id'));
 
-        $list_perumahan = HouseBlock::where('house_id', $perumahan->id)
+        $list_perumahan = HouseBlock::select('*')
+                                    ->where('house_id', $perumahan->id)
                                     ->where('status', 'ready')
                                     ->orderBy('created_at', 'desc')
                                     ->get();
+        // $list_perumahan = HouseBlock::whereHasNot
+        //                             ->where('house_id', $perumahan->id)
+        //                             ->where('status', 'ready')
+        //                             ->orderBy('created_at', 'desc')
+        //                             ->get();
 
         return json_encode($list_perumahan);
     }
