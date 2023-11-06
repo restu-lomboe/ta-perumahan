@@ -91,10 +91,12 @@
                                     <td>{{ $item->no_id_pdam }}</td>
                                     <td class="text-center">
                                         @if ($status = checkHouseStatus($perumahan->id, $item->id))
-                                            @if ($status->status == 0)
-                                                <span class="badge badge-warning">Booking</span>
-                                            @else
+                                            @if ($status->status == 6)
                                                 <span class="badge badge-primary">Deal</span>
+                                            @elseif ($status->status == 7)
+                                                <span class="badge badge-success">ready</span>
+                                            @else
+                                                <span class="badge badge-warning">Booking</span>
                                             @endif
                                         @else
                                             @if ($item->status == 'ready')

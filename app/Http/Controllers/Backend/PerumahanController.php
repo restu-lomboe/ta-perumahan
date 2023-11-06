@@ -152,7 +152,9 @@ class PerumahanController extends Controller
 
         $perumahan = House::find($request->get('id'));
 
-        $list_perumahan = HouseBlock::whereDoesntHave('booking')
+        $list_perumahan = HouseBlock::whereHas('booking', function($query){
+                                        $query->where('status', '7');
+                                    })
                                     ->where('house_id', $perumahan->id)
                                     ->where('status', 'ready')
                                     ->orderBy('created_at', 'desc')

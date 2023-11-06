@@ -83,7 +83,11 @@
                                     <td>{{ $item->perumahan->name }}</td>
                                     <td>{{ $item->perumahanBlok->name }} - {{ $item->perumahanBlok->no }}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/' . $item->payment) }}" width="100px" alt="">
+                                        <a href="javascript:;" class="viewImage"
+                                            data-src="{{ asset('uploads/' . $item->payment) }}">
+                                            <img src="{{ asset('uploads/' . $item->payment) }}" width="100px"
+                                                alt="">
+                                        </a>
                                     </td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                                     <td>
@@ -337,6 +341,20 @@
             </form>
         </div>
     </div>
+
+    <!-- ciew image -->
+    <div class="modal fade" id="viewImageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="" class="modal-img" width="100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -388,6 +406,12 @@
                     console.error('AJAX Error: ' + textStatus, errorThrown);
                 }
             });
+        })
+
+        $(document).on('click', '.viewImage', function() {
+            const imageUrl = $(this).attr('data-src')
+            $('#viewImageModal').modal('show')
+            $('.modal-img').attr('src', imageUrl)
         })
     </script>
 @endsection

@@ -15,9 +15,9 @@
         .block-card .block {
             /* width: 200px; */
             /* height: 80px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center; */
+                            display: flex;
+                            justify-content: center;
+                            align-items: center; */
         }
 
         .divider-vertical {
@@ -84,7 +84,7 @@
 
 
     <!-- Marketing messaging and featurettes
-                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                    ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
@@ -93,50 +93,36 @@
         <div class="list-block mb-5 px-5 pb-5">
 
             <div class="row">
-                {{-- @for ($i = 1; $i < 20; $i++)
-                    <div class="col-md-1 mb-3 {{ $i }} @if ($i % 2 == 0) pl-0 @else pr-0 @endif">
-                        <div class="block-card text-center">
-                            <div class="block border p-2 bg-secondary">
-                                <h1 class="mb-0 text-white">A</h1>
-                            </div>
-                            <div class="block border p-2 bg-secondary">
-                                <h1 class="mb-0 text-white">{{ $i < 10 ? '0' . $i : $i }}</h1>
-                            </div>
-                        </div>
-                    </div>
-                @endfor --}}
                 @foreach ($house->blocks as $item)
+                    @php
+                        $color = '';
+                        if (checkHouseStatus($house->id, $item->id)) {
+                            if (checkHouseStatus($house->id, $item->id)->status == 7) {
+                                $color = 'bg-secondary';
+                            } elseif (checkHouseStatus($house->id, $item->id)->status == 6) {
+                                $color = 'bg-success';
+                            } else {
+                                $color = 'bg-warning';
+                            }
+                        } else {
+                            if ($item->status == 'booking') {
+                                $color = 'bg-warning';
+                            } elseif ($item->status == 'ready') {
+                                $color = 'bg-secondary';
+                            } else {
+                                $color = 'bg-success';
+                            }
+                        }
+                    @endphp
                     <div class="col-md-2 mb-3 @if ($loop->iteration % 2 == 0) pl-0 @else pr-0 @endif">
                         <div class="block-card text-center">
-                            <div
-                                class="block border p-2 {{ checkHouseStatus($house->id, $item->id) ? (checkHouseStatus($house->id, $item->id)->status == 0 ? 'bg-warning' : 'bg-success') : 'bg-secondary' }}">
+                            <div class="block border p-2 {{ $color }}">
                                 <h1 class="mb-0 text-white">{{ $item->name }}-{{ $item->no }}</h1>
                             </div>
-                            {{-- <div
-                                class="block border p-2 {{ checkHouseStatus($house->id, $item->id) ? (checkHouseStatus($house->id, $item->id)->status == 0 ? 'bg-warning' : 'bg-success') : 'bg-secondary' }}">
-                                <h1 class="mb-0 text-white">{{ $item->no }}</h1>
-                            </div> --}}
                         </div>
                     </div>
                 @endforeach
             </div>
-            {{-- <div class="block-card text-center">
-                <div class="block border p-2 bg-secondary">
-                    <h1 class="mb-0 text-white">A</h1>
-                </div>
-                <div class="block border p-2 bg-secondary">
-                    <h1 class="mb-0 text-white">01</h1>
-                </div>
-            </div>
-            <div class="block-card text-center">
-                <div class="block border p-2 bg-secondary">
-                    <h1 class="mb-0 text-white">A</h1>
-                </div>
-                <div class="block border p-2 bg-secondary">
-                    <h1 class="mb-0 text-white">02</h1>
-                </div>
-            </div>
-            <div class="divider-vertical"></div> --}}
         </div>
 
 
