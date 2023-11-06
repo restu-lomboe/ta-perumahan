@@ -233,6 +233,7 @@
                                 <select name="blok_id" class="custom-select custom-select-sm blokNumber" id="blokNo"
                                     required>
                                     <option selected disabled>-- Pilih --</option>
+                                    
                                 </select>
                             </div>
                         </div>

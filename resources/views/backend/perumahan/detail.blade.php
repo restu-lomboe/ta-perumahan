@@ -85,8 +85,6 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->no }}</td>
                                     <td>{{ $item->no_token_listrik }}</td>
-                                    <td>{{ $item->no_imb }}</td>
-                                    <td>{{ $item->no_id_pdam }}</td>
                                     <td class="text-center">
                                         @if ($status = checkHouseStatus($perumahan->id, $item->id))
                                             @if ($status->status == 6)

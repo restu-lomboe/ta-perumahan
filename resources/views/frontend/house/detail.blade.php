@@ -25,38 +25,38 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://img.freepik.com/free-photo/luxury-pool-villa-spectacular-contemporary-design-digital-art-real-estate-home-house-property-ge_1258-150749.jpg?w=1060&t=st=1698236909~exp=1698237509~hmac=31911ef40eba454050c61429b05fb5cf25fd167ee50ed6c210f32dbcd7baafe7"
+                <img src="{{ asset('assets/img/bg-kantor.jpg') }}"
                     alt="">
 
                 <div class="container">
                     <div class="carousel-caption text-left">
-                        <h1>Example headline.</h1>
-                        <p>Some representative placeholder content for the first slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                        <h1>PT. PRIMA INTI NUSA</h1>
+                        <p>Jl. Flamboyan I Komplek Taman Asoka Asri Blok B-3B Medan 20134.</p>
+                        <p><a class="btn btn-lg btn-primary" href="{{ route('register') }}">Sign up today</a></p>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://img.freepik.com/free-photo/luxury-pool-villa-spectacular-contemporary-design-digital-art-real-estate-home-house-property-ge_1258-150749.jpg?w=1060&t=st=1698236909~exp=1698237509~hmac=31911ef40eba454050c61429b05fb5cf25fd167ee50ed6c210f32dbcd7baafe7"
+                <img src="{{ asset('assets/img/bg-rumah.jpg') }}"
                     alt="">
 
                 <div class="container">
                     <div class="carousel-caption text-left">
-                        <h1>Example headline.</h1>
-                        <p>Some representative placeholder content for the first slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    <h1>PT. PRIMA INTI NUSA</h1>
+                        <p>Jl. Flamboyan I Komplek Taman Asoka Asri Blok B-3B Medan 20134.</p>
+                        <p><a class="btn btn-lg btn-primary" href="{{ route('register') }}">Sign up today</a></p>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://img.freepik.com/free-photo/luxury-pool-villa-spectacular-contemporary-design-digital-art-real-estate-home-house-property-ge_1258-150749.jpg?w=1060&t=st=1698236909~exp=1698237509~hmac=31911ef40eba454050c61429b05fb5cf25fd167ee50ed6c210f32dbcd7baafe7"
+                <img src="{{ asset('assets/img/bg-rumah1.jpg') }}"
                     alt="">
 
                 <div class="container">
                     <div class="carousel-caption text-left">
-                        <h1>Example headline.</h1>
-                        <p>Some representative placeholder content for the first slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                    <h1>PT. PRIMA INTI NUSA</h1>
+                        <p>Jl. Flamboyan I Komplek Taman Asoka Asri Blok B-3B Medan 20134.</p>
+                        <p><a class="btn btn-lg btn-primary" href="{{ route('register') }}">Sign up today</a></p>
                     </div>
                 </div>
             </div>
@@ -116,8 +116,8 @@
                     @endphp
                     <div class="col-md-2 mb-3 @if ($loop->iteration % 2 == 0) pl-0 @else pr-0 @endif">
                         <div class="block-card text-center">
-                            <div class="block border p-2 {{ $color }}">
-                                <h1 class="mb-0 text-white">{{ $item->name }}-{{ $item->no }}</h1>
+                            <div class="block border p-5 {{ $color }}">
+                                <h6 class="mb-0 text-white">{{ $item->name }}-{{ $item->no }}</h6>
                             </div>
                         </div>
                     </div>
