@@ -97,9 +97,14 @@
                                                 <span class="badge badge-primary">Deal</span>
                                             @endif
                                         @else
-                                            <span class="badge badge-success">Ready</span>
+                                            @if ($item->status == 'ready')
+                                                <span class="badge badge-success">Ready</span>
+                                            @elseif ($item->status == 'booking')
+                                                <span class="badge badge-warning">Booking</span>
+                                            @else
+                                                <span class="badge badge-primary">Deal</span>
+                                            @endif
                                         @endif
-
                                     </td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                                     @if (auth()->user()->role_id == 1)
@@ -158,7 +163,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="noTokenListrik" class="col-sm-4 col-form-label">No Token Listrik</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_token_listrik" id="noTokenListrik">
@@ -175,7 +180,7 @@
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_id_pdam" id="noIdPdam">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -225,7 +230,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="noTokenListrikUpdate" class="col-sm-4 col-form-label">No Token Listrik</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_token_listrik"
@@ -243,7 +248,7 @@
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_id_pdam" id="noIdPdamUpdate">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

@@ -107,7 +107,7 @@ class PerumahanController extends Controller
             $perumahan_blok->no_token_listrik = $request->no_token_listrik;
             $perumahan_blok->no_imb = $request->no_imb;
             $perumahan_blok->no_id_pdam = $request->no_id_pdam;
-            $perumahan_blok->status = $request->status == 1 ? 'ready' : ($request->status == '2' ? 'booking' : 'deal');
+            $perumahan_blok->status = $request->status == 1 ? 'ready' : ($request->status == 2 ? 'booking' : 'deal');
             $perumahan_blok->save();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -127,10 +127,7 @@ class PerumahanController extends Controller
         $request->validate([
             'blok' => 'required|alpha_num',
             'no_rumah' => 'required|numeric',
-            'status' => 'required|integer',
-            'no_token_listrik' => 'required',
-            'no_imb' => 'required',
-            'no_id_pdam' => 'required',
+            'status' => 'required|integer'
         ]);
 
         try {
@@ -142,7 +139,7 @@ class PerumahanController extends Controller
                 'no_token_listrik' => $request->no_token_listrik,
                 'no_imb' => $request->no_imb,
                 'no_id_pdam' => $request->no_id_pdam,
-                'status' => $request->status == '1' ? 'ready' : ($request->status == '2' ? 'booking' : 'deal'),
+                'status' => $request->status == 1 ? 'ready' : ($request->status == 2 ? 'booking' : 'deal'),
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
