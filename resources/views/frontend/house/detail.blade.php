@@ -15,9 +15,9 @@
         .block-card .block {
             /* width: 200px; */
             /* height: 80px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center; */
+                                                                        display: flex;
+                                                                        justify-content: center;
+                                                                        align-items: center; */
         }
 
         .divider-vertical {
@@ -84,7 +84,7 @@
 
 
     <!-- Marketing messaging and featurettes
-                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
@@ -93,24 +93,35 @@
         <div class="list-block mb-5 px-5 pb-5">
 
             <div class="row">
+                @php
+                    $total_ready = 0;
+                    $total_booking = 0;
+                    $total_deal = 0;
+                @endphp
                 @foreach ($house->blocks as $item)
                     @php
                         $color = '';
                         if (checkHouseStatus($house->id, $item->id)) {
                             if (checkHouseStatus($house->id, $item->id)->status == 7) {
                                 $color = 'bg-secondary';
+                                $total_ready++;
                             } elseif (checkHouseStatus($house->id, $item->id)->status == 6) {
                                 $color = 'bg-success';
+                                $total_deal++;
                             } else {
                                 $color = 'bg-warning';
+                                $total_booking++;
                             }
                         } else {
                             if ($item->status == 'booking') {
                                 $color = 'bg-warning';
+                                $total_booking++;
                             } elseif ($item->status == 'ready') {
                                 $color = 'bg-secondary';
+                                $total_ready++;
                             } else {
                                 $color = 'bg-success';
+                                $total_deal++;
                             }
                         }
                     @endphp
@@ -125,7 +136,40 @@
             </div>
         </div>
 
-
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="block-card text-left">
+                    <div class="block border pl-3 p-2 bg-success">
+                        <h4 class="mb-0 text-white d-flex justify-content-between">
+                            <span>Terjual:</span>
+                            <span>{{ $total_deal }}</span>
+                        </h4>
+                    </div>
+                    <div class="block border pl-3 p-2 bg-warning">
+                        <h4 class="mb-0 text-white d-flex justify-content-between">
+                            <span>Booking:</span>
+                            <span>{{ $total_booking }}</span>
+                        </h4>
+                    </div>
+                    <div class="block border pl-3 p-2 bg-secondary">
+                        <h4 class="mb-0 text-white d-flex justify-content-between">
+                            <span>Ready:</span>
+                            <span>{{ $total_ready }}</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="block-card text-left">
+                    <div class="block border pl-3 p-2 bg-secondary">
+                        <h4 class="mb-0 text-white d-flex justify-content-between">
+                            <span>Total Block:</span>
+                            <span>{{ $house->blocks->count() }}</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <hr class="featurette-divider mt-3">
         <!-- /END THE FEATURETTES -->
