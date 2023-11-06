@@ -30,26 +30,19 @@ class PerumahanController extends Controller
 
         $request->validate([
             'nama' => 'required|string',
-<<<<<<< HEAD
             'alamat' => 'required|string',
             'harga' => 'required|string',
             'no_imb' => 'required|string',
             'uji_pdam' => 'required|string'
-=======
-            'alamat' => 'required|string'
->>>>>>> origin/testing
         ]);
 
         try {
             $perumahan = new House;
             $perumahan->name = $request->nama;
             $perumahan->address = $request->alamat;
-<<<<<<< HEAD
             $perumahan->price = $request->harga;
             $perumahan->no_imb = $request->no_imb;
             $perumahan->uji_pdam = $request->uji_pdam;
-=======
->>>>>>> origin/testing
             $perumahan->save();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -62,14 +55,10 @@ class PerumahanController extends Controller
 
         $request->validate([
             'nama' => 'required|string',
-<<<<<<< HEAD
             'alamat' => 'required|string',
             'harga' => 'required|string',
             'no_imb' => 'required|string',
             'uji_pdam' => 'required|string'            
-=======
-            'alamat' => 'required|string'
->>>>>>> origin/testing
         ]);
 
         try {
@@ -77,12 +66,9 @@ class PerumahanController extends Controller
             $perumahan->update([
                 'name' => $request->nama,
                 'address' => $request->alamat,
-<<<<<<< HEAD
                 'price' => $request->harga,
                 'no_imb' => $request->no_imb,
                 'uji_pdam' => $request->uji_pdam,
-=======
->>>>>>> origin/testing
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -131,13 +117,7 @@ class PerumahanController extends Controller
             $perumahan_blok->name = $request->blok;
             $perumahan_blok->no = $request->no_rumah;
             $perumahan_blok->no_token_listrik = $request->no_token_listrik;
-<<<<<<< HEAD
             $perumahan_blok->status = $request->status == 1 ? 'ready' : ($request->status == '2' ? 'booking' : 'deal');
-=======
-            $perumahan_blok->no_imb = $request->no_imb;
-            $perumahan_blok->no_id_pdam = $request->no_id_pdam;
-            $perumahan_blok->status = $request->status == 1 ? 'ready' : ($request->status == 2 ? 'booking' : 'deal');
->>>>>>> origin/testing
             $perumahan_blok->save();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -157,12 +137,8 @@ class PerumahanController extends Controller
         $request->validate([
             'blok' => 'required|alpha_num',
             'no_rumah' => 'required|numeric',
-<<<<<<< HEAD
             'status' => 'required|integer',
             'no_token_listrik' => 'required',
-=======
-            'status' => 'required|integer'
->>>>>>> origin/testing
         ]);
 
         try {
@@ -172,13 +148,7 @@ class PerumahanController extends Controller
                 'name' => $request->blok,
                 'no' => $request->no_rumah,
                 'no_token_listrik' => $request->no_token_listrik,
-<<<<<<< HEAD
                 'status' => $request->status == '1' ? 'ready' : ($request->status == '2' ? 'booking' : 'deal'),
-=======
-                'no_imb' => $request->no_imb,
-                'no_id_pdam' => $request->no_id_pdam,
-                'status' => $request->status == 1 ? 'ready' : ($request->status == 2 ? 'booking' : 'deal'),
->>>>>>> origin/testing
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -191,13 +161,9 @@ class PerumahanController extends Controller
 
         $perumahan = House::find($request->get('id'));
 
-<<<<<<< HEAD
-        $list_perumahan = HouseBlock::whereDoesntHave('booking')
-=======
         $list_perumahan = HouseBlock::whereHas('booking', function($query){
                                         $query->where('status', '7');
                                     })
->>>>>>> origin/testing
                                     ->where('house_id', $perumahan->id)
                                     ->where('status', 'ready')
                                     ->orderBy('created_at', 'desc')
