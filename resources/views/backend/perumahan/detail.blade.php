@@ -85,17 +85,26 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->no }}</td>
                                     <td>{{ $item->no_token_listrik }}</td>
+                                    <td>{{ $item->no_imb }}</td>
+                                    <td>{{ $item->no_id_pdam }}</td>
                                     <td class="text-center">
                                         @if ($status = checkHouseStatus($perumahan->id, $item->id))
-                                            @if ($status->status == 0)
+                                            @if ($status->status == 6)
+                                                <span class="badge badge-primary">Deal</span>
+                                            @elseif ($status->status == 7)
+                                                <span class="badge badge-success">ready</span>
+                                            @else
+                                                <span class="badge badge-warning">Booking</span>
+                                            @endif
+                                        @else
+                                            @if ($item->status == 'ready')
+                                                <span class="badge badge-success">Ready</span>
+                                            @elseif ($item->status == 'booking')
                                                 <span class="badge badge-warning">Booking</span>
                                             @else
                                                 <span class="badge badge-primary">Deal</span>
                                             @endif
-                                        @else
-                                            <span class="badge badge-success">Ready</span>
                                         @endif
-
                                     </td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                                     @if (auth()->user()->role_id == 1)

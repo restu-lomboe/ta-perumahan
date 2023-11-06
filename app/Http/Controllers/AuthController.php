@@ -44,7 +44,11 @@ class AuthController extends Controller
         ]);
 
         $user = new User;
+<<<<<<< HEAD
         $user->role_id = 3; //role user
+=======
+        $user->role_id = 2; //role user
+>>>>>>> origin/testing
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
