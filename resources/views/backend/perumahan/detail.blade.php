@@ -70,6 +70,7 @@
                                 <th style="width: 70px;">No</th>
                                 <th>Blok</th>
                                 <th>No Rumah</th>
+                                <th>Harga</th>
                                 <th>No Meteran Listrik</th>
                                 <th style="width: 100px;">Status</th>
                                 <th style="width: 200px;">Ditambahkan Pada</th>
@@ -84,6 +85,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->no }}</td>
+                                    <td>Rp. {{number_format($item->price,0,',','.')}}</td>
                                     <td>{{ $item->no_token_listrik }}</td>
                                     <td class="text-center">
                                         @if ($status = checkHouseStatus($perumahan->id, $item->id))
@@ -151,6 +153,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="noRumah" class="col-sm-4 col-form-label">Harga</label>
+                            <div class="col-sm-8">
+                                <input type="number" min="1" class="form-control" name="price"
+                                    value="{{ old('price') }}" placeholder="Harga Rumah" id="price" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="blok" class="col-sm-4 col-form-label">Status</label>
                             <div class="col-sm-8">
                                 <select name="status" class="custom-select custom-select-sm" required>
@@ -200,9 +209,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="noRumah" class="col-sm-4 col-form-label">Harga</label>
+                            <div class="col-sm-8">
+                                <input type="number" min="1" class="form-control" name="price"
+                                    placeholder="Harga Rumah" id="price" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="blok" class="col-sm-4 col-form-label">Status</label>
                             <div class="col-sm-8">
-                                <select name="status" class="custom-select custom-select-sm" id="status" required>
+                                <select name="status" class="custom-select custom-select-sm" id="status">
                                     <option selected>-- Pilih --</option>
                                     <option value="1">Ready</option>
                                     <option value="2">Booking</option>
@@ -242,6 +258,7 @@
                     $('#UpdateBlokModal').modal('show')
                     $('#blokUpdate').val(response.name)
                     $('#noRumahUpdate').val(response.no)
+                    $('#price').val(response.price)
                     $('#noTokenListrikUpdate').val(response.no_token_listrik)
                     $('#status').val(response.status == 'ready' ? 1 : (response.status == 'booking' ?
                         2 : 3))

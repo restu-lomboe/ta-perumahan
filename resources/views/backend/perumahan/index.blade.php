@@ -41,7 +41,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Perumahan</th>
-                                <th>Harga</th>
                                 <th>No. IMB</th>
                                 <th>No. Hasil Uji Air</th>
                                 <th>Ditambahkan Pada</th>
@@ -53,7 +52,6 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>Rp. {{number_format($item->price,0,',','.')}}</td>
                                     <td>{{ $item->no_imb }}</td>
                                     <td>{{ $item->uji_pdam}}</td>
                                     <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>

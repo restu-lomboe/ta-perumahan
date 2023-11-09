@@ -75,14 +75,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="nama" class="col-sm-2 col-form-label">Harga</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" name="harga"
-                                value="{{ $type == 'update' ? $perumahan->price :old('harga') }}"
-                                placeholder="Harga Perumahan" id="harga" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="nama" class="col-sm-2 col-form-label">No. IMB</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="no_imb"

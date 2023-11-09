@@ -31,7 +31,6 @@ class PerumahanController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'alamat' => 'required|string',
-            'harga' => 'required|string',
             'no_imb' => 'required|string',
             'uji_pdam' => 'required|string'
         ]);
@@ -40,7 +39,6 @@ class PerumahanController extends Controller
             $perumahan = new House;
             $perumahan->name = $request->nama;
             $perumahan->address = $request->alamat;
-            $perumahan->price = $request->harga;
             $perumahan->no_imb = $request->no_imb;
             $perumahan->uji_pdam = $request->uji_pdam;
             $perumahan->save();
@@ -56,7 +54,6 @@ class PerumahanController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'alamat' => 'required|string',
-            'harga' => 'required|string',
             'no_imb' => 'required|string',
             'uji_pdam' => 'required|string'            
         ]);
@@ -66,7 +63,6 @@ class PerumahanController extends Controller
             $perumahan->update([
                 'name' => $request->nama,
                 'address' => $request->alamat,
-                'price' => $request->harga,
                 'no_imb' => $request->no_imb,
                 'uji_pdam' => $request->uji_pdam,
             ]);
@@ -100,7 +96,8 @@ class PerumahanController extends Controller
         $request->validate([
             'blok' => 'required|alpha_num',
             'no_rumah' => 'required|numeric',
-            'status' => 'required|integer'
+            'status' => 'required|integer',
+            'price' => 'required|numeric'
         ]);
 
         $checkExistPerumahan = HouseBlock::where('house_id', $request->get('id'))
@@ -116,6 +113,7 @@ class PerumahanController extends Controller
             $perumahan_blok->house_id = $request->get('id');
             $perumahan_blok->name = $request->blok;
             $perumahan_blok->no = $request->no_rumah;
+            $perumahan_blok->price = $request->price;
             $perumahan_blok->no_token_listrik = $request->no_token_listrik;
             $perumahan_blok->status = $request->status == 1 ? 'ready' : ($request->status == '2' ? 'booking' : 'deal');
             $perumahan_blok->save();
@@ -139,6 +137,7 @@ class PerumahanController extends Controller
             'no_rumah' => 'required|numeric',
             'status' => 'required|integer',
             'no_token_listrik' => 'required',
+            'price' => 'required',
         ]);
 
         try {
@@ -147,6 +146,7 @@ class PerumahanController extends Controller
             $perumahan_blok->update([
                 'name' => $request->blok,
                 'no' => $request->no_rumah,
+                'price' => $request->price,
                 'no_token_listrik' => $request->no_token_listrik,
                 'status' => $request->status == '1' ? 'ready' : ($request->status == '2' ? 'booking' : 'deal'),
             ]);
@@ -161,10 +161,7 @@ class PerumahanController extends Controller
 
         $perumahan = House::find($request->get('id'));
 
-        $list_perumahan = HouseBlock::whereHas('booking', function($query){
-                                        $query->where('status', '7');
-                                    })
-                                    ->where('house_id', $perumahan->id)
+        $list_perumahan = HouseBlock::where('house_id', $perumahan->id)
                                     ->where('status', 'ready')
                                     ->orderBy('created_at', 'desc')
                                     ->get();

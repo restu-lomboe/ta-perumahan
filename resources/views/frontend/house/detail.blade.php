@@ -116,8 +116,9 @@
                     @endphp
                     <div class="col-md-2 mb-3 @if ($loop->iteration % 2 == 0) pl-0 @else pr-0 @endif">
                         <div class="block-card text-center">
-                            <div class="block border p-5 {{ $color }}">
+                            <div class="block border pt-5 pb-5 {{ $color }}">
                                 <h6 class="mb-0 text-white">{{ $item->name }}-{{ $item->no }}</h6>
+                                <h6>Rp. {{number_format($item->price,0,',','.')  }}</h6>
                             </div>
                         </div>
                     </div>
