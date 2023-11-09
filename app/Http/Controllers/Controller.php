@@ -16,7 +16,7 @@ class Controller extends BaseController
     public function __construct()
     {
         // Share data to all views
-        Booking::where('status', 1)
+        Booking::where('status', 0)
                 ->where('created_at', '<=', Carbon::now()->subMonths(3))->update([
                     'status' => 7
                 ]);
